@@ -2,7 +2,6 @@
   "name": "foodie-map",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
