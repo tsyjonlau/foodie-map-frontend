@@ -1,4 +1,4 @@
-name: foodie-map CI
+name: foodie-map-frontend CI
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
           yarn test
 
   deploy:
-    needs: [lint-test-python, lint-test-js]
+    needs: [lint-test-js]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
