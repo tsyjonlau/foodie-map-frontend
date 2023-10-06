@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +15,12 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MapIcon from '@mui/icons-material/Map';
 
-const pages = ['Map', 'Bookmarks'];
+
+const pages = [
+    { text: 'Map', href: '/map' },
+    { text: 'Bookmarks', href: '/bookmarks' }
+]
+
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Navbar() {
@@ -86,9 +93,11 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Link key={page.href} to={page.href} style={{ textDecoration: 'none', color: 'black' }}>
+                    <MenuItem key={page.href} onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">{page.text}</Typography>
+                    </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -99,26 +108,26 @@ function Navbar() {
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
           >
-            LOGO
+            Foodie Map
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                component={Link}
+                to={page.href}
+                key={page.href}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.text}
               </Button>
             ))}
           </Box>
@@ -126,7 +135,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" />
               </IconButton>
             </Tooltip>
             <Menu
