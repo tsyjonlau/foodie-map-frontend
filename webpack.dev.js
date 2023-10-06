@@ -10,6 +10,7 @@ module.exports = merge(common, {
     },
     compress: true,
     port: 3000,
+    historyApiFallback: true
   },
   optimization: {
     runtimeChunk: 'single',
