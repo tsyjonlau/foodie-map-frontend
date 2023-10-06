@@ -7,7 +7,7 @@ from backend.settings_common import *  # noqa: F401,F403
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'django-react-boilerplate-ilro.onrender.com'
+    'foodie-map.onrender.com',
 ]
 
 DATABASES = {
