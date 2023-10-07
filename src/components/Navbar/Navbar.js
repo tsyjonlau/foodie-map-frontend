@@ -15,7 +15,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MapIcon from '@mui/icons-material/Map';
 
-
 const pages = [
     { text: 'Map', href: '/map' },
     { text: 'Bookmarks', href: '/bookmarks' }
