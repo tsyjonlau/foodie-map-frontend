@@ -5,7 +5,7 @@ import './Map.css';
 const DEFAULT_MAP_POSITION = { lat: 43.7181228, lng: -79.5428675 }
 
 function Map() {
-    const [map, setMap] = useState(null);
+    const [currentMap, setCurrentMap] = useState(null);
     const [geolocation, setGeolocation] = useState(null);
     const [isGeolocalizing, setIsGeolocalizing] = useState(true);
 
@@ -27,18 +27,18 @@ function Map() {
         }
     }
     
-    const initMap = async() => {
+    const initMap = async () => {
         const { Map } = await google.maps.importLibrary('maps');
 
         const newMap = new Map(document.getElementsByClassName('Map')[0], {
-            zoom: 4,
+            zoom: 15,
             center: DEFAULT_MAP_POSITION,
             mapId: 'FOODIE_MAP_DEFAULT',
             mapTypeControl: false,
             streetViewControl: false,
         });
 
-        setMap(newMap);
+        setCurrentMap(newMap);
     }
 
     useEffect(() => {
@@ -46,19 +46,13 @@ function Map() {
         initMap();
     }, []);
 
-    const initMarker = async() => {
-        const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
 
         const marker = new AdvancedMarkerElement({
-            map: map,
-            position: geolocation ? geolocation : DEFAULT_MAP_POSITION,
-            title: 'Uluru',
         });
-    }
 
     useEffect(() => {
-        initMarker();
-    }, [map, isGeolocalizing]);
+        currentMap?.setCenter(geolocation);
+    }, [currentMap, isGeolocalizing])
 
     return(
         <div className='Map'>
