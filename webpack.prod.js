@@ -10,7 +10,6 @@ module.exports = merge(common, {
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/static/',
   },
   plugins: [
     new MiniCssExtractPlugin({
