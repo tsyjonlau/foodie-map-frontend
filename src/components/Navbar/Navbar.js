@@ -13,6 +13,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import MapIcon from '@mui/icons-material/Map';
 
 const pages = [
@@ -25,17 +27,23 @@ const settings = ['Profile', 'Account', 'Logout'];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
   };
+
+  const handleTabValueChange = (event, newValue) => {
+    setTabIndex(newValue);
+  }
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -49,8 +57,6 @@ function Navbar() {
           <Typography
             variant='h6'
             noWrap
-            component='a'
-            href='/'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -118,19 +124,25 @@ function Navbar() {
             Foodie Map
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                component={Link}
-                to={page.href}
-                key={page.href}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.text}
-              </Button>
-            ))}
+            <Tabs
+              value={tabIndex}
+              textColor='inherit'
+              indicatorColor='white'
+              onChange={handleTabValueChange}
+            >
+              {pages.map((page) => (
+                <Tab
+                  label={page.text}
+                  component={Link}
+                  to={page.href}
+                  key={page.href}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                </Tab>
+              ))}
+            </Tabs>
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

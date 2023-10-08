@@ -12,7 +12,7 @@ const routesConfig = [
       children: [
         {
           path: '',
-          element: <Home />
+          element: <Map />
         },
         {
           path: '/map',
